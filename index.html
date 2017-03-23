@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Clicker</title>
+    <style type="text/css">
+
+      #admin-area {
+        margin-left: 10em;
+        visibility: hidden;
+      }
+
+      form {
+        text-align: right;
+        width: 15%;
+      }
+
+      button[type="reset"] {
+        margin-right: .25em;
+      }
+
+      #admin-button {
+        float: left;
+      }
+
+    </style>
+</head>
+<body>
+    <ul id="cat-list"></ul>
+    <div id="cat">
+        <h2 id="cat-name"></h2>
+        <div id="cat-count"></div>
+        <img id="cat-img" src="" alt="cute cat">
+    </div>
+    <br>
+    <button type="button" id="admin-button">Admin</button>
+    <form id="admin-area">
+        <label for="name">Name:</label>
+        <input type="text" id="name"><br>
+        <br>
+        <label for="url">Img URL:</label>
+        <input type="text" id="url"><br>
+        <br>
+        <label for="clicks">#Clicks:</label>
+        <input type="text" id="clicks"><br>
+        <br>
+        <button type="reset" form="admin-area" id="cancel-button">Cancel</button>
+        <button type="button" form="admin-area">Save</button>
+    </form>
+    <script src="js/app.js"></script>
+</body>
+</html>
