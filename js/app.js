@@ -1,6 +1,6 @@
 /* ======= Model ======= */
 var model = {
-    adminViewShowing: false,
+    adminViewShowing: true,
     currentCat: null,
     cats: [
         {
@@ -73,6 +73,10 @@ var octopus = {
         } else {
             model.adminViewShowing = false;
         }
+    },
+
+    updateCurrentCatAfterSave: function(catName) {
+        model.currentCat.name = catName;
     }
 };
 
@@ -82,11 +86,17 @@ var catView = {
     init: function() {
         // store pointers to our DOM elements for easy access later
         this.catElem = document.getElementById('cat');
-        this.adminButton = document.getElementById('admin-button');
-        this.cancelButton = document.getElementById('cancel-button');
         this.catNameElem = document.getElementById('cat-name');
         this.catImageElem = document.getElementById('cat-img');
         this.countElem = document.getElementById('cat-count');
+
+        this.adminButton = document.getElementById('admin-button');
+        this.cancelButton = document.getElementById('cancel-button');
+        this.saveButton = document.getElementById('save-button');
+
+        this.nameInput = document.getElementById('name');
+        this.urlInput = document.getElementById('url');
+        this.clicksInput = document.getElementById('clicks');
 
         // on click, increment the current cat's counter
         this.catImageElem.addEventListener('click', function(){
@@ -101,6 +111,12 @@ var catView = {
         this.cancelButton.addEventListener('click', function() {
             octopus.toggleAdminView();
             catView.render();
+        }, false);
+
+        this.saveButton.addEventListener('click', function() {
+            octopus.updateCurrentCatAfterSave();
+            octopus.toggleAdminView();
+            catView.render();            
         }, false);
 
         // render this view (update the DOM elements with the right values)
@@ -119,6 +135,12 @@ var catView = {
         } else {
             this.closeAdmin();
         }
+
+        this.nameInput.value = currentCat.name;
+        this.urlInput.value = currentCat.imgSrc;
+        this.clicksInput.value = currentCat.clickCount;
+
+
     },
 
     openAdmin: function() {
@@ -129,10 +151,6 @@ var catView = {
     closeAdmin: function() {
         var adminArea = document.getElementById('admin-area');
         adminArea.style.visibility = "hidden";
-    },
-
-    updateCurrentCatAfterSave: function() {
-
     }
 };
 
