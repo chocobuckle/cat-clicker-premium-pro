@@ -75,8 +75,10 @@ var octopus = {
         }
     },
 
-    updateCurrentCatAfterSave: function(catName) {
+    updateCurrentCatAfterSave: function(catName, imgSrc, catClicks) {
         model.currentCat.name = catName;
+        model.currentCat.imgSrc = imgSrc;
+        model.currentCat.clickCount = catClicks;
     }
 };
 
@@ -114,9 +116,10 @@ var catView = {
         }, false);
 
         this.saveButton.addEventListener('click', function() {
-            octopus.updateCurrentCatAfterSave();
+            octopus.updateCurrentCatAfterSave(catView.nameInput.value, catView.urlInput.value, catView.clicksInput.value);
             octopus.toggleAdminView();
-            catView.render();            
+            catView.render();      
+            catListView.render();      
         }, false);
 
         // render this view (update the DOM elements with the right values)
@@ -139,8 +142,6 @@ var catView = {
         this.nameInput.value = currentCat.name;
         this.urlInput.value = currentCat.imgSrc;
         this.clicksInput.value = currentCat.clickCount;
-
-
     },
 
     openAdmin: function() {
