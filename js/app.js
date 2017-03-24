@@ -36,7 +36,6 @@ var model = {
     ]
 };
 
-
 /* ======= Octopus ======= */
 var octopus = {
     init: function() {
