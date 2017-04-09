@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Cat Clicker</title>
     <style type="text/css">
-      
       #admin-area {
         margin-left: 10em;
         text-align: right;
@@ -20,10 +19,22 @@
         float: left;
       }
 
+      #cat-list {
+        cursor: pointer;
+        list-style: none;
+        padding-left: 0;
+        width: 100px;
+      }
+
+      ol li {
+        font-size: 1.2em;
+        margin: .4em 0;
+      }
+
     </style>
 </head>
 <body>
-    <ul id="cat-list"></ul>
+    <ol id="cat-list"></ol>
     <div id="cat">
         <h2 id="cat-name"></h2>
         <div id="cat-count"></div>

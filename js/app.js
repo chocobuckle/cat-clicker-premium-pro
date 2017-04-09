@@ -165,6 +165,7 @@ var catListView = {
 
     render: function() {
         var cat, elem, i;
+        
         // get the cats we'll be rendering from the octopus
         var cats = octopus.getCats();
 
