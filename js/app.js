@@ -36,14 +36,14 @@ var model = {
     ]
 };
 
-/* ======= Octopus ======= */
-var octopus = {
+/* ======= viewModel ======= */
+var viewModel = {
     init: function() {
         // set our current cat to the first one in the list
         model.currentCat = model.cats[0];
 
         // tell our views to initialize
-        catListView.init();
+        view.init();
         catView.init();
     },
 
@@ -101,24 +101,24 @@ var catView = {
 
         // on click, increment the current cat's counter
         this.catImageElem.addEventListener('click', function(){
-            octopus.incrementCounter();
+            viewModel.incrementCounter();
         });
 
         this.adminButton.addEventListener('click', function() {
-            octopus.toggleAdminView();
+            viewModel.toggleAdminView();
             catView.render();
         }, false);
 
         this.cancelButton.addEventListener('click', function() {
-            octopus.toggleAdminView();
+            viewModel.toggleAdminView();
             catView.render();
         }, false);
 
         this.saveButton.addEventListener('click', function() {
-            octopus.updateCurrentCatAfterSave(catView.nameInput.value, catView.urlInput.value, catView.clicksInput.value);
-            octopus.toggleAdminView();
-            catView.render();      
-            catListView.render();      
+            viewModel.updateCurrentCatAfterSave(catView.nameInput.value, catView.urlInput.value, catView.clicksInput.value);
+            viewModel.toggleAdminView();
+            catView.render();
+            view.render();
         }, false);
 
         // render this view (update the DOM elements with the right values)
@@ -127,7 +127,7 @@ var catView = {
 
     render: function() {
         // update the DOM elements with values from the current cat
-        var currentCat = octopus.getCurrentCat();
+        var currentCat = viewModel.getCurrentCat();
         this.countElem.textContent = currentCat.clickCount;
         this.catNameElem.textContent = currentCat.name;
         this.catImageElem.src = currentCat.imgSrc;
@@ -154,7 +154,7 @@ var catView = {
     }
 };
 
-var catListView = {
+var view = {
     init: function() {
         // store the DOM element for easy access later
         this.catListElem = document.getElementById('cat-list');
@@ -165,9 +165,9 @@ var catListView = {
 
     render: function() {
         var cat, elem, i;
-        
-        // get the cats we'll be rendering from the octopus
-        var cats = octopus.getCats();
+
+        // get the cats we'll be rendering from the viewModel
+        var cats = viewModel.getCats();
 
         // empty the cat list
         this.catListElem.innerHTML = '';
@@ -186,7 +186,7 @@ var catListView = {
             //  of the cat variable to the click event function)
             elem.addEventListener('click', (function(catCopy) {
                 return function() {
-                    octopus.setCurrentCat(catCopy);
+                    viewModel.setCurrentCat(catCopy);
                     catView.render();
                 };
             })(cat));
@@ -198,4 +198,4 @@ var catListView = {
 };
 
 // make it go!
-octopus.init();
+viewModel.init();
